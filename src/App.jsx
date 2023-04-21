@@ -26,8 +26,10 @@ const App = () => {
         {
           loggedIn ?  // se tiver logado...
           <>
-          <Route path="/" element={<Home onLogout={handleLogout}/>} />
-          <Route path="/perfil" element={<Perfil onLogout={handleLogout}/>} />
+            <Route path="/" element={<Layout onLogout = {handleLogout} />}>
+              <Route index /* index: o path é o mesmo que o definido no elemento Route pai ("") */ element={<Home />} />
+              <Route path="perfil" /* na prática: = /perfil (herda a barra do elemento Route pai)*/ element={<Perfil />} />
+            </Route>
           </>
           // ... possibilitar o acesso a essas rotas.
           :   // caso contrário...
