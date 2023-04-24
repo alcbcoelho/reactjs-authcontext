@@ -2,6 +2,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Perfil from "./pages/Perfil";
 import Erro404 from "./pages/Erro404";
+import Layout from "./components/Layout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
@@ -11,13 +12,16 @@ import { useState } from "react";
 
 const App = () => {
   const [ loggedIn, setLoggedIn ] = useState(false);  // inicialmente, o usuário não está logado na aplicação
+  const [ userID, setUserID ] = useState();
 
   function handleLogin(e) {
     setLoggedIn(true);
+    setUserID(100);
   }
 
   function handleLogout(e) {
     setLoggedIn(false);
+    setUserID(null);
   }
 
   return (
@@ -26,9 +30,9 @@ const App = () => {
         {
           loggedIn ?  // se tiver logado...
           <>
-            <Route path="/" element={<Layout onLogout = {handleLogout} />}>
+            <Route path="/" element={<Layout id={userID} onLogout = {handleLogout} />}>
               <Route index /* index: o path é o mesmo que o definido no elemento Route pai ("") */ element={<Home />} />
-              <Route path="perfil" /* na prática: = /perfil (herda a barra do elemento Route pai)*/ element={<Perfil />} />
+              <Route path="perfil/:id" /* na prática: = /perfil (herda a barra do elemento Route pai)*/ element={<Perfil />} />
             </Route>
           </>
           // ... possibilitar o acesso a essas rotas.

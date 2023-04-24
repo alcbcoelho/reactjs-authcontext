@@ -1,12 +1,11 @@
 import Navbar from "../components/Navbar";
 
 const Home = (props) => {
-    return (
-      <>
-      <Navbar onLogout={props.onLogout} />
+  return (
+    <>
       <h1>Home</h1>
-      </>
-    )
-  }
-  
-  export default Home;
+    </>
+  );
+};
+
+export default Home;

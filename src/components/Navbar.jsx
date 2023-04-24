@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = (props) => {
   const navigate = useNavigate(); // useNavigate: hook que gera um objeto (navigate) que é posteriormente chamado como uma função
+  const perfil = `perfil/${props.id}`;
 
   function handleClick(event) {
     props.onLogout(event);
@@ -15,7 +16,7 @@ const Navbar = (props) => {
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="/perfil">Perfil</NavLink>
+        <NavLink to={perfil}>Perfil</NavLink>
       </li>
       <button onClick={handleClick}>Sair</button>
     </ul>
