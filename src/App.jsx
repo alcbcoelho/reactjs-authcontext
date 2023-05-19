@@ -1,3 +1,5 @@
+import { useContext } from "react";   // hook p/ usar contextos
+import AuthContext from "./contexts/AuthContext";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Perfil from "./pages/Perfil";
@@ -11,18 +13,7 @@ import { useState } from "react";
 // Route: uma rota individual, com propriedades/props para o caminho ('path') e o componente a ser renderizado ('element') (ver abaixo)
 
 const App = () => {
-  const [ loggedIn, setLoggedIn ] = useState(false);  // inicialmente, o usuário não está logado na aplicação
-  const [ userID, setUserID ] = useState();
-
-  function handleLogin(e) {
-    setLoggedIn(true);
-    setUserID(100);
-  }
-
-  function handleLogout(e) {
-    setLoggedIn(false);
-    setUserID(null);
-  }
+  const { loggedIn } = useContext(AuthContext);   // resgatando o atributo loggedIn do objeto AuthContext
 
   return (
     <BrowserRouter>
@@ -30,14 +21,14 @@ const App = () => {
         {
           loggedIn ?  // se tiver logado...
           <>
-            <Route path="/" element={<Layout id={userID} onLogout = {handleLogout} />}>
+            <Route path="/" element={<Layout />}>
               <Route index /* index: o path é o mesmo que o definido no elemento Route pai ("") */ element={<Home />} />
               <Route path="perfil/:id" /* na prática: = /perfil (herda a barra do elemento Route pai)*/ element={<Perfil />} />
             </Route>
           </>
           // ... possibilitar o acesso a essas rotas.
           :   // caso contrário...
-          <Route path="/login" element={<Login onLogin={handleLogin}/>} />
+          <Route path="/login" element={<Login />} />
           // ... possibilitar o acesso apenas à rota de login
         }
         <Route path="*" element={<Erro404 />} />

@@ -1,18 +1,18 @@
+import { useContext } from "react";
+import AuthContext from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";    // hook useForm, ideal para trabalhar com formulários (ao invés de usar useRef, como foi feito no commit anterior a esse; COMPARAR OS DOIS COMMITS E VER O QUE MUDA)
 
 const Login = (props) => {
+  const { login } = useContext(AuthContext);  // pegando o atributo login do AuthContext
+
   const navigate = useNavigate(); // useNavigate: hook que gera um objeto (navigate) que é posteriormente chamado como uma função
   const form = useForm();
   const { register, handleSubmit, formState: { errors } } = form;  // o objeto 'register' guarda os atributos "name", "ref" de um elemento input.
-  
-  function handleClick(event) {
-    props.onLogin(event);
-    navigate("/"); // faz com que a rota atual mude para a rota principal
-  }
 
   function handleFormSubmit(data) {
-    console.log(data)
+    login(event);
+    navigate("/"); // faz com que a rota atual mude para a rota principal
   }
 
   return (

@@ -4,8 +4,8 @@ import Navbar from "./Navbar";
 const Layout = (props) => {
   return (
     <>
-    <Navbar id={props.id} onLogout={props.onLogout} />
-    <Outlet></Outlet> {/* * */}
+    <Navbar />
+    <Outlet /> {/* * */}
     </>
   )
 }

@@ -1,12 +1,15 @@
+import { useContext } from "react";
+import AuthContext from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 const Navbar = (props) => {
   const navigate = useNavigate(); // useNavigate: hook que gera um objeto (navigate) que é posteriormente chamado como uma função
-  const perfil = `perfil/${props.id}`;
+  const { userID, logout } = useContext(AuthContext);   // extraindo atributos userID e logout do contexto
+  const perfil = `perfil/${userID}`;
 
   function handleClick(event) {
-    props.onLogout(event);
+    logout(event);
     navigate("/login");
   }
 
