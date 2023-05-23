@@ -8,12 +8,15 @@ import Layout from "./components/Layout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
+// Equivalente do Redux ao hook useContext
+import { useSelector } from "react-redux";
+
 // BrowserRouter: possibilita a navegação do browser dentro do React
 // Routes: possibilita o cadastro das rotas da aplicação
 // Route: uma rota individual, com propriedades/props para o caminho ('path') e o componente a ser renderizado ('element') (ver abaixo)
 
 const App = () => {
-  const { loggedIn } = useContext(AuthContext);   // resgatando o atributo loggedIn do objeto AuthContext
+  const { loggedIn } = useSelector((state) => state.auth);  
 
   return (
     <BrowserRouter>
